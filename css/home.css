@@ -1,0 +1,6 @@
+.root{
+    -fx-background-image: url("../img/backgred.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-attachment: fixed;
+}

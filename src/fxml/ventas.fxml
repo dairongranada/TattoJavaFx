@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.99" prefHeight="601.0" prefWidth="999.0" style="-fx-background-color: #000;" stylesheets="@css.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllHome">
+   <children>
+      <ImageView fitHeight="556.0" fitWidth="426.0" layoutX="560.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/tatto6.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGuardar" layoutX="115.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#clickGuardar" prefHeight="46.0" prefWidth="367.0" style="-fx-background-color: #B65513; -fx-border-radius: 100;" text="S A V E" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text fill="WHITE" layoutX="116.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client" wrappingWidth="69.3671875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="115.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product" wrappingWidth="119.3671875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtTatto" layoutX="115.0" layoutY="388.0" prefHeight="46.0" prefWidth="367.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <Text fill="WHITE" layoutX="116.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Of Tattoo" wrappingWidth="136.3671875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="cmbClient" layoutX="112.0" layoutY="192.0" prefHeight="46.0" prefWidth="367.0" />
+      <ComboBox fx:id="cmbProduct" layoutX="112.0" layoutY="289.0" prefHeight="46.0" prefWidth="367.0" />
+   </children>
+</Pane>

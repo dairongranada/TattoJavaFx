@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.99" prefHeight="601.0" prefWidth="999.0" style="-fx-background-color: #000;" stylesheets="@css.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllHome">
+   <children>
+      <Accordion layoutX="148.0" layoutY="72.0" />
+      <Accordion layoutX="148.0" layoutY="143.0" />
+      <ImageView fitHeight="320.0" fitWidth="445.0" layoutX="534.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/tatuador1.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="310.0" fitWidth="427.0" layoutX="44.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/tatuador3.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="388.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ARTISTS" textAlignment="CENTER" wrappingWidth="230.88287353515625">
+         <font>
+            <Font size="50.0" />
+         </font>
+         <effect>
+            <Reflection fraction="0.52" topOffset="-10.0" topOpacity="0.33" />
+         </effect>
+      </Text>
+      <MenuBar layoutY="-1.0" prefHeight="30.0" prefWidth="999.0" style="-fx-background-color: fff; -fx-color: #fff;">
+         <menus>
+            <Menu fx:id="dates" mnemonicParsing="false" text="DATES" />
+            <Menu mnemonicParsing="false" text="OPTIONS">
+            <items>
+               <MenuItem fx:id="venta" mnemonicParsing="false" onAction="#opensVentas" text="VENTAS" />
+            </items>
+            </Menu>
+            <Menu fx:id="exit" mnemonicParsing="false" text="EXIT" />
+         </menus>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuBar>
+   </children>
+</Pane>
