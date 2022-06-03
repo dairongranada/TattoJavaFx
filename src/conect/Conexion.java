@@ -6,11 +6,12 @@ import java.sql.SQLException;
 /**
  *
  * @author coarf
- */
-public class Conexion {
+**/
+
+public class Conexion { 
     private Connection con;
-    private String login="daironGranada";
-    private String clave="123456";
+    private String login="root";
+    private String clave="";
     private boolean conectado;
 
     public Connection getCon() {
