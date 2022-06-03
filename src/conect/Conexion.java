@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class Conexion {
     private Connection con;
-    private String login="dairon";
+    private String login="daironGranada";
     private String clave="123456";
     private boolean conectado;
 
