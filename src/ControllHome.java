@@ -18,6 +18,7 @@ import conect.Conexion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
@@ -42,6 +43,41 @@ public class ControllHome {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void opensClientes(ActionEvent event) throws SQLException{
+        try {
+            Parent root = (new FXMLLoader(getClass().getResource("fxml/gestionClientes.fxml"))).load();
+            Scene scene =  new Scene(root);
+            Stage teatro = new Stage();
+            teatro.setTitle("Clientes");
+            teatro.setScene(scene);
+            teatro.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    void opensProductos(ActionEvent event) throws SQLException{
+        try {
+            Parent root = (new FXMLLoader(getClass().getResource("fxml/ventas.fxml"))).load();
+            Scene scene =  new Scene(root);
+            Stage teatro = new Stage();
+            teatro.setTitle("Productos");
+            teatro.setScene(scene);
+            teatro.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
 
     Connection con = null;
@@ -88,9 +124,8 @@ public class ControllHome {
             alerta.setContentText("Please select a product");
             alerta.showAndWait();
         }
-        else if(tipoTatto==null || tipoTatto.isEmpty() || !esValido(tipoTatto)){
+        else if(tipoTatto==null || tipoTatto.isEmpty()){ //|| !esValido(tipoTatto)
             Alert alerta = new Alert(AlertType.ERROR);
-            alerta.setHeaderText(null);
             alerta.setTitle("Data validation");
             alerta.setContentText("Please indicate the number of tattoos to be tattooed ");
             alerta.showAndWait();
@@ -122,17 +157,17 @@ public class ControllHome {
         
     }
     
-    private boolean esValido(String valor){
-        boolean sw = false;
-        try{
-            int dato = Integer.parseInt(valor);
-            sw= dato>0;
-        }
-        catch (NumberFormatException e){
-            sw = false;
-        }
-        return sw;
-    }
+    // private boolean esValido(String valor){
+    //     boolean sw = false;
+    //     try{
+    //         int dato = Integer.parseInt(valor);
+    //         sw= dato>0;
+    //     }
+    //     catch (NumberFormatException e){
+    //         sw = false;
+    //     }
+    //     return sw;
+    // }
     
     @FXML
     void initialize() throws IOException, SQLException{
@@ -149,7 +184,7 @@ public class ControllHome {
             rst = stm.executeQuery(query);
             System.out.println("Voy bien dentro combo");
             while (rst.next()) {
-                dato = String.format("%d %s %s", rst.getInt("idClientes"), rst.getString("nombre"), rst.getString("apellidos"));
+                dato = String.format("%s %s %s", rst.getInt("idClientes"), rst.getString("nombre"), rst.getString("apellidos"));
                 cmbClient.getItems().add(dato);
             }
         } catch (Exception e) {
@@ -161,7 +196,7 @@ public class ControllHome {
         try (Statement stm = conect.getCon().createStatement()){ //Preparo el area para las consultas
             rst = stm.executeQuery(query);
             while (rst.next()) {
-                dato = String.format("%d %s", rst.getInt("codigo"), rst.getString("nombre"));
+                dato = String.format("%s %s", rst.getInt("codigo"), rst.getString("nombre"));
                 cmbProduct.getItems().add(dato);
             }
         } catch (Exception e) {

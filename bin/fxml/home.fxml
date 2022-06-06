@@ -39,10 +39,11 @@
             <Menu fx:id="dates" mnemonicParsing="false" text="DATES" />
             <Menu mnemonicParsing="false" text="OPTIONS">
             <items>
-               <MenuItem fx:id="venta" mnemonicParsing="false" onAction="#opensVentas" text="VENTAS" />
+               <MenuItem fx:id="sales" mnemonicParsing="false" onAction="#opensVentas" text="SALES" />
+                  <MenuItem fx:id="products" mnemonicParsing="false" onAction="#opensProductos" text="PRODUCTS" />
+                  <MenuItem fx:id="clientes" mnemonicParsing="false" onAction="#opensClientes" text="MANAGE CLIENTS" />
             </items>
             </Menu>
-            <Menu fx:id="exit" mnemonicParsing="false" text="EXIT" />
          </menus>
          <opaqueInsets>
             <Insets />
