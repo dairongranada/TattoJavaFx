@@ -11,32 +11,28 @@ import conect.Conexion;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ControllClientes {
-    String estadoCliente;
-    int codigoCliente;
+public class ControllProductos {
+    String estadoProductos;
+    int codeProduct;
     Conexion con = new Conexion();
     
-    @FXML private TextField txtIdentifi;
-    @FXML private TextField txtName;
-    @FXML private TextField txtApellido;
+    @FXML private TextField txtCod;
+    @FXML private TextField txtNameT;
+    @FXML private TextField txtPrecio;
     
 
     @FXML private ImageView buscarImg;
     @FXML private TextField textfieldRespuesta;
 
 
-
-    @FXML private Button btnDelete;
     @FXML private Button btnNew;
     @FXML private Button btnUpdate;
-
-    @FXML private ComboBox<String> cmbGenero;
+    @FXML private Button btnDelete;
 
     String query;
 
@@ -45,22 +41,22 @@ public class ControllClientes {
 
     @FXML
     void buscarImgClick(MouseEvent event) throws SQLException {
-        String iden = txtIdentifi.getText();
+        String iden = txtCod.getText();
         if (iden==null || iden.isEmpty()) {
             textfieldRespuesta.setText("Digite una identificación valida para poder buscar");
         }
         else{
             con.conectar();
             try(Statement stm = con.getCon().createStatement()){
-                int ident = Integer.parseInt(txtIdentifi.getText());
-                ResultSet rta = stm.executeQuery("select * from clientes where cedula = '"+ident+"'");
+                int cods = Integer.parseInt(txtCod.getText());
+                ResultSet rta = stm.executeQuery("select * from ptattos where codigo = '"+cods+"'");
                 if(rta.next()){
-                    codigoCliente = rta.getInt("idClientes");
-                    estadoCliente = rta.getString("estado");
-                    txtName.setText(rta.getString("nombre"));
-                    txtApellido.setText(rta.getString("apellidos"));
-                    cmbGenero.setValue(rta.getString("genero"));
-                    if (estadoCliente.equalsIgnoreCase("A")) {
+                    codeProduct = rta.getInt("codigo");
+                    estadoProductos = rta.getString("estado");
+                    txtNameT.setText(rta.getString("nombre"));
+                    txtPrecio.setText(rta.getString("pVenta"));
+
+                    if (estadoProductos.equalsIgnoreCase("A")) {
                         btnDelete.setText("Borrar");
                     } else {
                         btnDelete.setText("Recuperar");
@@ -70,7 +66,7 @@ public class ControllClientes {
                     textfieldRespuesta.clear();
                 }
                 else
-                    textfieldRespuesta.setText("No se encontro registro que coincida con la identificación");
+                    textfieldRespuesta.setText("No se encontro registro que coincida con ese CODIGO");
             }
             con.desconectar();
         }
@@ -79,25 +75,17 @@ public class ControllClientes {
 
     @FXML
     void actionUpdate(MouseEvent event) throws SQLException {
-        //Recuperar los valores suministrados
-        //Preparar la consulta a utilizar (Actualizar todo los campos)
-        //Ejecuta la consulta
+
+        String nom = txtNameT.getText();
+        String pre = txtPrecio.getText();
         
-        String ide = txtIdentifi.getText();
-        String nom = txtName.getText();
-        String ape = txtApellido.getText();
-        String gen = cmbGenero.getValue();
-        
-        if(ide==null || ide.isEmpty())
-            textfieldRespuesta.setText("Debe ingresar una Identificacion valida");
-        else if(nom == null || nom.isEmpty())
+
+        if(nom == null || nom.isEmpty())
             textfieldRespuesta.setText("Debe ingresar un Nombre valido");
-        else if(ape == null || ape.isEmpty())
-            textfieldRespuesta.setText("Debe ingresar un Apellido valido");
-        else if(gen == null || gen.isEmpty())
-            textfieldRespuesta.setText("Debe ingresar un genero valido");
+        else if(pre == null || pre.isEmpty())
+            textfieldRespuesta.setText("Debe ingresar un Precio valido");
         else{
-            String query1 = "UPDATE clientes set cedula = '"+ide+"', nombre = '"+nom+"' , apellidos = '"+ape+"', genero = '"+gen+"' WHERE cedula = "+ide;
+            String query1 = "UPDATE ptattos set nombre = '"+nom+"' , pVenta = '"+pre+"', WHERE nombre = "+nom;
             con.conectar();
             System.out.println("voy bien");
             try(Statement stm = con.getCon().createStatement()){
@@ -116,15 +104,12 @@ public class ControllClientes {
 
     @FXML
     void actionDelete(MouseEvent event) throws SQLException {
-        //Recuperar el texto del boton
-        //Preparar la consulta a utilizar (Borrar --> estado=I, recuperar--> estado =A)
-        //Ejecuta la consulta
         String acc = btnDelete.getText();
 
         if ("Borrar".equalsIgnoreCase(acc)) {
-            query = "UPDATE clientes set estado = 'I' where idClientes="+codigoCliente;
+            query = "UPDATE ptattos set estado = 'I' where codigo="+ codeProduct;
         } else {
-            query = "UPDATE clientes set estado = 'A' where idClientes="+codigoCliente;
+            query = "UPDATE ptattos set estado = 'A' where codigo="+ codeProduct;
         }
         con.conectar();
         try(Statement stm = con.getCon().createStatement()){
@@ -140,11 +125,9 @@ public class ControllClientes {
     }
     
     private void restaurarDatos(){
-        
-        txtName.clear();
-        txtApellido.clear();
-        txtIdentifi.clear();
-        cmbGenero.setValue("M");
+        txtNameT.clear();
+        txtPrecio.clear();
+        txtCod.clear();
         btnDelete.setDisable(true);
         btnDelete.setText("Borrar");
         btnUpdate.setDisable(true);
@@ -153,29 +136,23 @@ public class ControllClientes {
 
     @FXML
     void actionNew(MouseEvent event) throws SQLException {
-        //Recuperar datos del formulario
-        //Validar Datos
-        //Preparar la insercion
-        String ide = txtIdentifi.getText();
-        String nom = txtName.getText();
-        String ape = txtApellido.getText();
-        String gen = cmbGenero.getValue();
-        if(ide==null || ide.isEmpty())
+        String codde = txtCod.getText();
+        String nom = txtNameT.getText();
+        String precio = txtPrecio.getText();
+        if(codde==null || codde.isEmpty())
             textfieldRespuesta.setText("Debe ingresar una Identificacion valida");
         else if(nom==null || nom.isEmpty())
             textfieldRespuesta.setText("Debe ingresar un Nombre valido");
-        else if(ape==null || ape.isEmpty())
-            textfieldRespuesta.setText("Debe ingresar un Apellido valido");
-        else if(gen==null || gen.isEmpty())
-            textfieldRespuesta.setText("Debe ingresar un genero valido");
+        else if(precio==null || precio.isEmpty())
+            textfieldRespuesta.setText("Debe ingresar un precio valido");
         else{
-            String query1 = "insert into clientes (cedula,nombre,apellidos,genero)values ('"+ide+"','"+nom+"','"+ape+"','"+gen+"')";
+            String query1 = "insert into ptattos(codigo,nombre,pVenta)values ('"+codde+"','"+nom+"','"+precio+"')";
             con.conectar();
             try (Statement stm = con.getCon().createStatement()){
                 int rest = stm.executeUpdate(query1);
                 if(rest != 0){
                     textfieldRespuesta.setText("Datos Registrados con exito");
-                    restaurarDatos();
+                    restaurarDatos(); //SE VACIAN LOS CAMPOS 
                 }
                 else{
                     textfieldRespuesta.setText("Error al grabar los datos por favor verifique");
@@ -188,18 +165,13 @@ public class ControllClientes {
 
     }
 
-    @FXML
-    void initialize(){ // Metodo de javafx que sirve para inicializar combox y demas en java apenas se abra una ventana
-        btnDelete.setDisable(true);
-        btnUpdate.setDisable(true);
-        // Para inicializar valores de combo de genero
-        cmbGenero.getItems().clear();
-        cmbGenero.getItems().addAll("M", "F");
-        cmbGenero.setValue("Select your gender");
-    }
+
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////         H E A D E R       ////////////////////////////////////
+    ///////////////////////////         H E A D E R      E X O T I C O    ////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
 
 

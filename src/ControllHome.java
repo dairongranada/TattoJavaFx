@@ -25,13 +25,36 @@ import javafx.scene.input.MouseEvent;
 
 public class ControllHome {    
 
-    // @FXML private Menu exit;
-    // @FXML private Menu dates;
-    @FXML private MenuItem ventas;
+    @FXML private Button sales;
+    @FXML private Button productos;
+    @FXML private Button clientes;
+    @FXML private Button signOff;
+
+////////////////////////////////////     C E R R A R    S E S I O N      /////////////////////////
+    @FXML
+	void closSignOff(ActionEvent event) throws SQLException{
+        try {
+            ///////////////////////////////////////////////////
+            Stage stage = (Stage) signOff.getScene().getWindow(); 
+            stage.close(); //CERRAR LA PESTAÑA DE HOME
+            Parent root = (new FXMLLoader(getClass().getResource("fxml/login.fxml"))).load();
+            Scene scene =  new Scene(root);
+            Stage teatro = new Stage();
+            teatro.setScene(scene);
+            teatro.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @FXML
 	void opensVentas(ActionEvent event) throws SQLException{
         try {
+            ///////////////////////////////////////////////////
+            Stage stage = (Stage) sales.getScene().getWindow(); 
+            stage.close(); //CERRAR LA PESTAÑA DE HOME
             Parent root = (new FXMLLoader(getClass().getResource("fxml/ventas.fxml"))).load();
             Scene scene =  new Scene(root);
             Stage teatro = new Stage();
@@ -44,26 +67,16 @@ public class ControllHome {
         }
     }
 
-    @FXML
-    void opensClientes(ActionEvent event) throws SQLException{
-        try {
-            Parent root = (new FXMLLoader(getClass().getResource("fxml/gestionClientes.fxml"))).load();
-            Scene scene =  new Scene(root);
-            Stage teatro = new Stage();
-            teatro.setTitle("Clientes");
-            teatro.setScene(scene);
-            teatro.show();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @FXML
     void opensProductos(ActionEvent event) throws SQLException{
         try {
-            Parent root = (new FXMLLoader(getClass().getResource("fxml/ventas.fxml"))).load();
+            ///////////////////////////////////////////////////
+            Stage stage = (Stage) productos.getScene().getWindow(); 
+            stage.close(); //CERRAR LA PESTAÑA DE HOME
+
+            Parent root = (new FXMLLoader(getClass().getResource("fxml/gestionProductos.fxml"))).load();
             Scene scene =  new Scene(root);
             Stage teatro = new Stage();
             teatro.setTitle("Productos");
@@ -74,9 +87,6 @@ public class ControllHome {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 
@@ -91,18 +101,55 @@ public class ControllHome {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////        V   E   N   T   A   S        //////////////////////////////////////////
 
-    @FXML
-    private Button btnGuardar;
+    @FXML private Button btnGuardar;
+
+    @FXML private ComboBox<String> cmbClient;
+
+    @FXML private ComboBox<String> cmbProduct;
+
+    @FXML private TextField txtTatto;
+
+    @FXML private Button home;
+
 
     @FXML
-    private ComboBox<String> cmbClient;
+    void opensHome(ActionEvent event) throws SQLException{
+        try {
+            ///////////////////////////////////////////////////
+            Stage stage = (Stage) home.getScene().getWindow(); 
+            stage.close(); //CERRAR LA PESTAÑA DE HOME
+
+            Parent root = (new FXMLLoader(getClass().getResource("fxml/home.fxml"))).load();
+            Scene scene =  new Scene(root);
+            Stage teatro = new Stage();
+            teatro.setScene(scene);
+            teatro.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
-    private ComboBox<String> cmbProduct;
+    void opensClientes(ActionEvent event) throws SQLException{
+        try {
+            ///////////////////////////////////////////////////
+            Stage stage = (Stage) clientes.getScene().getWindow(); 
+            stage.close(); //CERRAR LA PESTAÑA DE HOME
 
-    @FXML
-    private TextField txtTatto;
-    
+            Parent root = (new FXMLLoader(getClass().getResource("fxml/gestionClientes.fxml"))).load();
+            Scene scene =  new Scene(root);
+            Stage teatro = new Stage();
+            teatro.setTitle("Clientes");
+            teatro.setScene(scene);
+            teatro.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @FXML
     void clickGuardar(MouseEvent event) throws SQLException {
