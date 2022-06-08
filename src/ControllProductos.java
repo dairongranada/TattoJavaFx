@@ -78,14 +78,13 @@ public class ControllProductos {
 
         String nom = txtNameT.getText();
         String pre = txtPrecio.getText();
-        
-
+    
         if(nom == null || nom.isEmpty())
             textfieldRespuesta.setText("Debe ingresar un Nombre valido");
         else if(pre == null || pre.isEmpty())
             textfieldRespuesta.setText("Debe ingresar un Precio valido");
         else{
-            String query1 = "UPDATE ptattos set nombre = '"+nom+"' , pVenta = '"+pre+"', WHERE nombre = "+nom;
+            String query1 = "UPDATE ptattos set nombre = '"+nom+"' , pVenta = '"+pre+ "'WHERE codigo = "+codeProduct;
             con.conectar();
             System.out.println("voy bien");
             try(Statement stm = con.getCon().createStatement()){

@@ -171,7 +171,7 @@ public class ControllHome {
             alerta.setContentText("Please select a product");
             alerta.showAndWait();
         }
-        else if(tipoTatto==null || tipoTatto.isEmpty()){ //|| !esValido(tipoTatto)
+        else if(tipoTatto== null || tipoTatto.isEmpty()){ 
             Alert alerta = new Alert(AlertType.ERROR);
             alerta.setTitle("Data validation");
             alerta.setContentText("Please indicate the number of tattoos to be tattooed ");
@@ -186,9 +186,10 @@ public class ControllHome {
                 tmp = producto.split(" ");
                 int prod = Integer.parseInt(tmp[0]);
                 String cant = tipoTatto;
+                System.out.println("UPDATE======================");
                 query = "INSERT INTO ventas(cliente,producTatto,cantidadTatto) VALUES ("+clie+","+prod+","+cant+")";
                 int resu = stm.executeUpdate(query);
-                if(resu!=0){
+                if(resu != 0){
                     System.out.println("Datos Insertados con exito");
                     txtTatto.clear();
                 }
@@ -201,25 +202,12 @@ public class ControllHome {
             
         }
         
-        
     }
-    
-    // private boolean esValido(String valor){
-    //     boolean sw = false;
-    //     try{
-    //         int dato = Integer.parseInt(valor);
-    //         sw= dato>0;
-    //     }
-    //     catch (NumberFormatException e){
-    //         sw = false;
-    //     }
-    //     return sw;
-    // }
+
     
     @FXML
     void initialize() throws IOException, SQLException{
         //Declaro variable
-        
         ResultSet rst;
         //Conectarme a la base de datos        
         conect.conectar();
@@ -227,11 +215,10 @@ public class ControllHome {
         //Preparar para recuperar datos de la base de datos. Tabla clientes
         query = "SELECT idClientes,nombre,apellidos from clientes order by apellidos,nombre";
         try (Statement stm = conect.getCon().createStatement()){ //Preparo el area para las consultas
-            System.out.println("Voy bien de la consulta combo");
             rst = stm.executeQuery(query);
             System.out.println("Voy bien dentro combo");
             while (rst.next()) {
-                dato = String.format("%s %s %s", rst.getInt("idClientes"), rst.getString("nombre"), rst.getString("apellidos"));
+                dato = String.format("%d %s %s", rst.getInt("idClientes"), rst.getString("nombre"), rst.getString("apellidos"));
                 cmbClient.getItems().add(dato);
             }
         } catch (Exception e) {
@@ -243,7 +230,7 @@ public class ControllHome {
         try (Statement stm = conect.getCon().createStatement()){ //Preparo el area para las consultas
             rst = stm.executeQuery(query);
             while (rst.next()) {
-                dato = String.format("%s %s", rst.getInt("codigo"), rst.getString("nombre"));
+                dato = String.format("%d %s", rst.getInt("codigo"), rst.getString("nombre"));
                 cmbProduct.getItems().add(dato);
             }
         } catch (Exception e) {

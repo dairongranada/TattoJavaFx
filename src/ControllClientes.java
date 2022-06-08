@@ -78,11 +78,7 @@ public class ControllClientes {
     }
 
     @FXML
-    void actionUpdate(MouseEvent event) throws SQLException {
-        //Recuperar los valores suministrados
-        //Preparar la consulta a utilizar (Actualizar todo los campos)
-        //Ejecuta la consulta
-        
+    void actionUpdate(MouseEvent event) throws SQLException {        
         String ide = txtIdentifi.getText();
         String nom = txtName.getText();
         String ape = txtApellido.getText();
@@ -140,7 +136,6 @@ public class ControllClientes {
     }
     
     private void restaurarDatos(){
-        
         txtName.clear();
         txtApellido.clear();
         txtIdentifi.clear();
